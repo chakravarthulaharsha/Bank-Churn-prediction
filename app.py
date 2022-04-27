@@ -15,7 +15,7 @@ import copy
 import time
 
 from src.navbar import get_navbar
-from src.graphs import df, layout, ohe, cat_features, svm_model, xgb_model  
+from src.graphs import df, layout, ohe, cat_features, baseline_model, updated_model  
 from content import tab_prediction_content, tab_analysis_content
 
 # Creating the app
@@ -143,8 +143,8 @@ def donut_categorical(feature):
 # Prediction Tab - Predict and Update the Result Cards 
 
 @app.callback(
-    [dash.dependencies.Output('svm_result', 'children'),
-     dash.dependencies.Output('xgb_result', 'children')],
+    [dash.dependencies.Output('baseline_result', 'children'),
+     dash.dependencies.Output('updated_result', 'children')],
 
     [dash.dependencies.Input('btn_predict', 'n_clicks')],
 
@@ -191,8 +191,8 @@ def predict_churn(n_clicks, ft_gender, ft_partner, ft_dependents, ft_phoneServic
 
     sample_df_enc = pd.concat([sample_df_enc, sample_df[['SeniorCitizen', 'MonthlyCharges', 'TotalCharges', 'tenure']]], axis=1)
 
-    svm_prediction = svm_model.predict(sample_df_enc)
-    xgb_prediction = xgb_model.predict(sample_df_enc)
+    baseline_prediction = baseline_model.predict(sample_df_enc)
+    updated_prediction = updated_model.predict(sample_df_enc)
 
     def churn_to_text(num):
         if(num == 0):
@@ -200,10 +200,9 @@ def predict_churn(n_clicks, ft_gender, ft_partner, ft_dependents, ft_phoneServic
         elif(num == 1):
             return "Predicted: Churn"
 
-    # print(svm_prediction)
 
     if(n_clicks):
-        return churn_to_text(xgb_prediction), churn_to_text(svm_prediction)
+        return churn_to_text(updated_prediction), churn_to_text(baseline_prediction)
     else:
         return no_update
 

@@ -26,14 +26,14 @@ layout = dict(
 )
 
 # Model Read
-svm_path = 'data/svm_model.sav'
-svm_model = joblib.load(svm_path)
+baseline_path = 'data/baseline_model.h5'
+baseline_model = joblib.load(baseline_path)
 
-xgb_path = 'data/xgb_model.sav'
-xgb_model = joblib.load(xgb_path)
+updated_path = 'data/Updated_model.h5'
+updated_model = joblib.load(updated_path)
 
 # Data Read
-df = pd.read_csv('data/Telco-Customer-Churn.csv')
+df = pd.read_csv('data/Bank-Churn-data.csv')
 df['TotalCharges'] = df['TotalCharges'].replace(" ", 0).astype('float32')
 
 cat_features = df.drop(['customerID','TotalCharges', 'MonthlyCharges', 'SeniorCitizen', 'tenure', 'Churn'],axis=1).columns

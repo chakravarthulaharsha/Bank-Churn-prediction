@@ -18,7 +18,7 @@ def get_navbar():
                             html.Img(src="/assets/GitHub-Mark-Light-64px.png", className="github-logo"),
                             html.P("GitHub", style={'display':'inline', 'color': '#EBEBEB'})
                         ],
-                        href="https://github.com/chakravarthulaharsha/telecom-customer-churn"
+                        href="https://github.com/chakravarthulaharsha/Bank-Churn-prediction"
                     )
                     
                 ]
